@@ -1,0 +1,32 @@
+---
+version: 0.1
+runson: ${matrix.os}
+
+autosplit: true
+concurrency: 4
+
+cypress: true
+cypressOps:
+  Build: "Hyperexecute Cypress Sample Build"
+  Tags: ["HYP-Cypress", "Hybrid", "Accessibility"]
+  BuildTags: ["HYP-Cypress-v10"]
+
+pre:
+  - npm install
+  - npm install cypress --save-dev
+  - npm i lambdatest-cypress-cli
+
+matrix:
+   os: [linux, win]
+   browser: ["chrome"]
+
+testDiscovery:
+  mode: dynamic
+  type: raw
+  command: ls cypress/e2e/2-advanced-examples
+
+testRunnerCommand: npx cypress run  --spec ./cypress/e2e/2-advanced-examples/$test --browser=${matrix.browser} --headed --config video=true
+
+parallelism: 1
+
+jobLabel: [cypress-v10, hybrid]

@@ -1,0 +1,38 @@
+---
+version: 0.1
+runson: mac
+
+autosplit: true
+concurrency: 4
+
+globalTimeout: 90
+testSuiteTimeout: 90
+testSuiteStep: 90
+
+retryOnFailure: true
+maxRetries: 1
+
+env:
+  PROJECT_TOKEN: ${PROJECT_TOKEN}
+
+cypress: true
+cypressOps:
+  Build: "Hyperexecute Cypress Sample Build"
+  Tags: ["HYP-Cypress", "macOS", "Autosplit", "Accessibility"]
+  BuildTags: ["HYP-Cypress-v10"]
+
+pre:
+  - npm install
+  - npm install cypress --save-dev
+  - npm i @lambdatest/smartui-cli @lambdatest/cypress-driver cypress@v13
+  - npx smartui config:create smartui-web.json
+  - npm i lambdatest-cypress-cli
+
+testDiscovery:
+  mode: static
+  type: raw
+  command: ls cypress/e2e/2-advanced-examples | sed -n 1,'1p'
+
+testRunnerCommand: npx smartui --config smartui-web.json exec -- npx cypress run --spec ./cypress/e2e/2-advanced-examples/$test --browser=chrome-latest --headed
+
+jobLabel: [cypress-v10, mac, autosplit]

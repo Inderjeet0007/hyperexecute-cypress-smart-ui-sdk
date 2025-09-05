@@ -1,0 +1,26 @@
+{
+  "name": "cy10",
+  "version": "1.0.0",
+  "description": "Cypress Testing",
+  "main": "index.js",
+  "scripts": {
+    "test": "cypress open"
+  },
+  "keywords": [
+    "cypress",
+    "testing",
+    "project"
+  ],
+  "author": "Asad Ahmad",
+  "license": "ISC",
+  "dependencies": {
+    "@lambdatest/cypress-driver": "^1.0.8",
+    "@lambdatest/smartui-cli": "^3.0.12",
+    "@reportportal/agent-js-cypress": "^5.0.4",
+    "cypress": "13.0.0",
+    "cypress-multi-reporters": "2.0.5",
+    "mochawesome": "^6.1.1",
+    "playwright": "^1.55.0",
+    "reportportal-js-client": "^2.2.1"
+  }
+}
