@@ -1,8 +1,16 @@
 name: Run Cypress Tests on LambdaTest
 
 on:
-  push:
-    branches: [ main ]  # or your dev branch
+  workflow_dispatch:
+    inputs:
+      test_run_id:
+        description: 'The Test Run ID'
+        required: true
+        default: 'YOUR TEST RUN ID'
+      concurrency:
+        description: 'Concurrency Level'
+        required: false
+        default: 1
 
 jobs:
   sanity-test:
@@ -16,10 +24,10 @@ jobs:
           response=$(curl --location 'https://test-manager-api.lambdatest.com/api/atm/v1/hyperexecute' \
             --header 'accept: application/json' \
             --header 'Content-Type: application/json' \
-            --header 'Authorization: Basic aW5kZXJqZWV0czpMVF96djlaNEkzUmpqY2psb0x6SzdlNHRDVE5MVU9OaWtQeG0wWUhTeXEzU3BYTmRiQw==' \
+            --header 'Authorization: Basic ${{ secrets.LT_Credentials }}' \
             --data '{
-                "test_run_id" : "HYPM-550422-1758641678500817102TON",
-                "concurrency" : 1,
+                "test_run_id" : \"${{ github.event.inputs.test_run_id }}\",
+                "concurrency" : ${{ github.event.inputs.concurrency }},
             }')
           echo "Response: $response"
           job_id=$(echo $response | jq -r '.job_id')
@@ -33,7 +41,7 @@ jobs:
           sleep 240  # Wait before checking the status
           response=$(curl --location "https://api.hyperexecute.cloud/v2.0/job/$job_id" \
             --header "accept: application/json" \
-            --header "Authorization: Basic aW5kZXJqZWV0czpMVF96djlaNEkzUmpqY2psb0x6SzdlNHRDVE5MVU9OaWtQeG0wWUhTeXEzU3BYTmRiQw==")
+            --header "Authorization: Basic ${{ secrets.LT_Credentials }}")
             
           echo "Response: $response"
           status=$(echo $response | jq -r '.data.status')
