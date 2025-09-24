@@ -25,10 +25,10 @@ jobs:
             --header 'accept: application/json' \
             --header 'Content-Type: application/json' \
             --header 'Authorization: Basic ${{ secrets.LT_Credentials }}' \
-            --data '{
-                "test_run_id" : \"${{ github.event.inputs.test_run_id }}\",
-                "concurrency" : ${{ github.event.inputs.concurrency }},
-            }')
+            --data "{
+              \"test_run_id\": \"${{ github.event.inputs.test_run_id }}\",
+              \"concurrency\": ${{ github.event.inputs.concurrency }},
+            }")
           echo "Response: $response"
           job_id=$(echo $response | jq -r '.job_id')
           echo "Job ID: $job_id"
