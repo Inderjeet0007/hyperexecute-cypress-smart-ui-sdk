@@ -15,7 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "@lambdatest/cypress-driver": "^1.0.8",
-    "@lambdatest/smartui-cli": "^3.0.12",
+    "@lambdatest/smartui-cli": "^4.1.30",
     "@reportportal/agent-js-cypress": "^5.0.4",
     "cypress": "13.0.0",
     "cypress-multi-reporters": "2.0.5",

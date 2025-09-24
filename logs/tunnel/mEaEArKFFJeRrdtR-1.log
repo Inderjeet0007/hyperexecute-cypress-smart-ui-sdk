@@ -1,0 +1,8 @@
+{"level":"info","time":"2025-09-24T15:58:02.105+0530","caller":"cmd/lt.go:207","msg":"LambdaTest Tunnel version: 3.2.20"}
+{"level":"warn","time":"2025-09-24T15:58:03.084+0530","caller":"custom/setup.go:876","msg":"Port 9090 is already in use. Trying on a random free tcp port."}
+{"level":"info","time":"2025-09-24T15:58:03.086+0530","caller":"custom/setup.go:891","msg":"Tunnel binary started on port :54036"}
+{"level":"info","time":"2025-09-24T15:58:03.494+0530","caller":"core/lifecycle.go:318","msg":"Launching tunnel"}
+{"level":"info","time":"2025-09-24T15:58:07.562+0530","caller":"core/lifecycle.go:440","msg":"You can start testing now"}
+{"level":"info","time":"2025-09-24T15:58:07.563+0530","caller":"core/lifecycle.go:441","msg":"Tunnel ID: 2185923"}
+{"level":"error","time":"2025-09-24T16:01:01.029+0530","caller":"custom/setup.go:544","msg":"Error Response dial tcp [::1]:9877: connect: connection refused for http request from host localhost:9877","tunnelID":"2185923","requestID":9}
+{"level":"info","time":"2025-09-24T16:01:24.897+0530","caller":"core/lifecycle.go:486","msg":"Stopping tunnel"}

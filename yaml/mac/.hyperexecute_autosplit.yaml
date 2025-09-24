@@ -3,7 +3,9 @@ version: 0.1
 runson: mac
 
 autosplit: true
-concurrency: 4
+concurrency: 1
+# tunnelNames: ["ltTunnelOne"]
+# autoHeal: true
 
 globalTimeout: 90
 testSuiteTimeout: 90
@@ -13,19 +15,23 @@ retryOnFailure: true
 maxRetries: 1
 
 env:
-  PROJECT_TOKEN: ${PROJECT_TOKEN}
+  PROJECT_TOKEN: "550422#01K48H7009RVX8JA684A2DZXRP#SmartUI_CY_HyperExecute_CLI"
 
 cypress: true
 cypressOps:
   Build: "Hyperexecute Cypress Sample Build"
   Tags: ["HYP-Cypress", "macOS", "Autosplit", "Accessibility"]
   BuildTags: ["HYP-Cypress-v10"]
+  accessibility: true                 #Enable accessibility testing
+  accessibilityWcagVersion: "wcag21a" #Specify WCAG version (e.g., WCAG 2.1 Level A)
+  accessibilityBestPractice: false    #Exclude best practice issues from results
+  accessibilityNeedsReview: true      #Include issues that need review
+  # autoHeal: true
 
 pre:
   - npm install
   - npm install cypress --save-dev
   - npm i @lambdatest/smartui-cli @lambdatest/cypress-driver cypress@v13
-  - npx smartui config:create smartui-web.json
   - npm i lambdatest-cypress-cli
 
 testDiscovery:
@@ -33,6 +39,6 @@ testDiscovery:
   type: raw
   command: ls cypress/e2e/2-advanced-examples | sed -n 1,'1p'
 
-testRunnerCommand: npx smartui --config smartui-web.json exec -- npx cypress run --spec ./cypress/e2e/2-advanced-examples/$test --browser=chrome-latest --headed
+testRunnerCommand: npx smartui --config smartui-web.json exec --fetch-results -- npx cypress run --spec ./cypress/e2e/2-advanced-examples/$test --browser=chrome-latest --headed
 
 jobLabel: [cypress-v10, mac, autosplit]
